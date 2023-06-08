@@ -1,0 +1,31 @@
+.characters {
+    display: grid;
+    justify-items: center;
+    align-items: top;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    min-height: 60rem;
+}
+
+.character {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    align-items:center;
+    justify-content: end;
+    height: 300px;
+    max-height: 400px;
+    text-align:center;
+}
+
+.favoriteAndCharacter {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.mainSearchInput {
+    display: flex;
+    height: 5rem;
+    padding: .7rem 0;
+}
