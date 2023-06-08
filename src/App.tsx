@@ -9,16 +9,13 @@ import { useScrollTopDistance } from './hooks/useScrollTopDistance'
 import { useKeypress } from './hooks/keypress'
 import { useGetCharactersByNameQuery } from './features/apiRickAndMorty/apiRickAndMorty'
 import { useDebounce } from './hooks/useDebounce'
-import type { PaginationCountCharacters } from './types/Characters'
-import { Input, Box, FormControl, FormLabel, Button, Text, Image, Tag, TagLabel, TagRightIcon, Fade, Spinner, Flex, InputGroup, Kbd, InputRightElement, InputRightAddon, useMediaQuery } from '@chakra-ui/react'
+import { Input, Box, FormControl, FormLabel, Button, Text, Image, Tag, TagLabel, TagRightIcon, Fade, Spinner, Flex, InputGroup, Kbd, InputRightAddon, useMediaQuery } from '@chakra-ui/react'
 import { ArrowUpIcon, StarIcon } from '@chakra-ui/icons'
 
 function App (): React.ReactElement {
   const dispatch = useAppDispatch()
 
-  const charactersInfo: PaginationCountCharacters = useAppSelector(state => state.charactersInfo)
-
-  const { characters, extraInfo } = charactersInfo
+  const { characters, extraInfo } = useAppSelector(state => state.charactersInfo)
 
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 500)
@@ -61,9 +58,10 @@ function App (): React.ReactElement {
 
   const { distanceTop } = useScrollTopDistance()
 
+  const mainInput = document.getElementById('mainInput')
   const controlK = useKeypress()
   if (controlK) {
-    mainInput.focus()
+    mainInput?.focus()
   }
 
   return (
@@ -84,8 +82,9 @@ function App (): React.ReactElement {
             fontFamily={'samp'}
             fontSize={['1.3rem']}
             variant='filled'
+            _focus={{ color: 'white' }}
             ></Input>
-            {isLargerThan640 ? <InputRightAddon bg='ffffff0A' fontSize={['1.3rem']} h='3rem' paddingX={'0'}><Kbd>control</Kbd>+<Kbd>i</Kbd></InputRightAddon> : null}
+            {isLargerThan640 ? <InputRightAddon bg='white' fontSize={['1.3rem']} h='3rem' paddingX={'0'}><Kbd>control</Kbd>+<Kbd>i</Kbd></InputRightAddon> : null}
             </InputGroup>
         </FormControl>
         <Box mt={['.5rem']}className='favoriteAndCharacter' aria-label='2 buttons, searched characters and favorites'>
@@ -96,7 +95,7 @@ function App (): React.ReactElement {
       <Box as='main'>
         { charactersListPage
           ? <Box aria-label='Group of characters' className='characters' mt={['0px', '0px', '4em']}>
-              {(error !== undefined) ? <Flex w='100%' h='400px' alignItems='center' justifyContent='center'><Text as='samp'>{error?.data?.error}</Text></Flex> : null}
+              {(error !== undefined) ? <Flex w='100%' h='400px' alignItems='center' justifyContent='center'><Text as='samp' color={'white'}>There is nothing here</Text></Flex> : null}
               {isLoading ? <Spinner color='red.500' size='xl' /> : null}
               {characters?.map(character => {
                 return (
@@ -116,7 +115,7 @@ function App (): React.ReactElement {
         }
         <Flex justifyContent={'center'} alignItems={'center'}>{isFetching ? <Spinner color='red.500' size='xl' /> : null}</Flex>
         <div ref={fromRef}></div>
-        {(extraInfo?.next === null) ? <Flex justifyContent={'center'} alignItems={'center'} mb={['2rem']}><Text as='samp'>There are no more characters to show</Text></Flex> : null }
+        {(extraInfo?.next === null) ? <Flex justifyContent={'center'} alignItems={'center'} pb={['2rem']}><Text as='samp' color={'white'}>There are no more characters to show</Text></Flex> : null }
 
       </Box>
       <Fade in={distanceTop}>

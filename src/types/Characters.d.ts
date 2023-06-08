@@ -40,10 +40,14 @@ export interface extraInfo {
 
 export interface PaginationCountCharacters {
   extraInfo: extraInfo | null
-  characters: Character[] | null
+  characters: Character[]
 }
 
-export interface initialCharactersStateInterface {
+export interface errorResponse {
+  data: {
+    message: string
+  }
+  status: number
   extraInfo: extraInfo | null
-  characters: Character[] | null
+  characters: Character[]
 }

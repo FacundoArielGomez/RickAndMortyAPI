@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Character, PaginationCountCharacters, extraInfo, initialCharactersStateInterface } from '../../types/Characters'
+import type { Character, PaginationCountCharacters, extraInfo } from '../../types/Characters'
 
-const initialCharactersState: initialCharactersStateInterface =
+const initialCharactersState: PaginationCountCharacters =
     {
       extraInfo: null,
       characters: []
@@ -17,20 +17,20 @@ export const charactersInfoStoreSlice = createSlice({
       return state
     },
     concatNextPage (state, action: PayloadAction<Character[]>) {
-      const newState = {
+      state = {
         extraInfo: state.extraInfo,
-        characters: state.characters?.concat(action.payload)
+        characters: state.characters.concat(action.payload)
       }
-      return newState
+      return state
     },
-    updateExtraInfo (state, action: PayloadAction<extraInfo>) {
-      const newState = {
+    updateExtraInfo (state, action: PayloadAction<extraInfo | null>) {
+      state = {
         extraInfo: action.payload,
         characters: state.characters
       }
-      return newState
+      return state
     },
-    cleanCharactersArray (state) {
+    cleanCharactersArray () {
       const newState = {
         extraInfo: null,
         characters: []

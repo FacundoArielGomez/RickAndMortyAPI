@@ -16,9 +16,9 @@ const Favorites: React.FC = () => {
             {favoritesToRender?.map(character => {
               return (
                     <Box mb={['2.4rem', '5rem']} mt={['.5rem']} as='article' key={character.id} className='character' >
-                        <Text fontSize={['2xl']} as='kbd' my={['0.5rem']} w={['100vh', '20rem']}>{character.name}</Text>
+                        <Text fontSize={['2xl']} as='kbd' color='white' my={['0.5rem']} w={['140%', '20rem']}>{character.name}</Text>
                         <Image borderRadius='full' src={character.image} height='200px' width='200px'></Image>
-                        <Text as='kbd' mt={['.5rem']}>{character.species}</Text>
+                        <Text as='kbd' mt={['.5rem']} color='white'>{character.species}</Text>
                         <Tag size='lg' cursor='pointer' mt={['.5rem']} onClick={() => dispatch(removeFromFavorites(character.id))}>
                           <TagLabel fontSize={['md']}>Delete</TagLabel>
                           <TagCloseButton />

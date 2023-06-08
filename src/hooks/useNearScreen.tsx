@@ -2,13 +2,13 @@ import { useState, useRef, useEffect } from 'react'
 
 interface useNearScreenInterface {
   isNearScreen: boolean
-  fromRef: React.MutableRefObject<HTMLDivElement> | null
+  fromRef: React.LegacyRef<HTMLDivElement> | undefined
 }
 
 const useNearScreen = ({ once = true }): useNearScreenInterface => {
   const [isNearScreen, setShows] = useState(false)
 
-  const fromRef = useRef<HTMLDivElement>()
+  const fromRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const element = fromRef.current
 
